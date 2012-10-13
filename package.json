@@ -1,0 +1,15 @@
+{
+  "author": "Matthijs Groen <matthijs.groen@gmail.com>",
+  "name": "js-factories",
+  "description": "Object factory to create dynamic test fixtures",
+  "keywords": [ "test", "fixtures", "factory", "testing", "traits", "sequences" ],
+  "version": "0.8.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthijsgroen/js-factories"
+  },
+  "bugs": {
+    "url": "https://github.com/matthijsgroen/js-factories/issues"
+  },
+  "main": "./js-factories"
+}
