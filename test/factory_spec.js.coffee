@@ -1,9 +1,8 @@
-#= require ./../factories
 
 describe 'Factory', ->
 
   beforeEach ->
-    Factory.define 'user', (args...) ->
+    Factory.define 'testFactSpecUser', (args...) ->
       args: args
 
   afterEach ->
@@ -12,11 +11,11 @@ describe 'Factory', ->
   describe '::define', ->
 
     it 'registers a factory', ->
-      result = Factory.create 'user'
+      result = Factory.create 'testFactSpecUser'
       result.args.should.deep.equal []
 
     it 'raises an error on existing factory', ->
-      expect(-> Factory.define('user', ->)).to.throw 'Factory user is already defined'
+      expect(-> Factory.define('testFactSpecUser', ->)).to.throw 'Factory user is already defined'
 
     it 'raises an error on naming conflict with traits', ->
       expect(-> Factory.define('admin-user', ->)).to.throw 'Factory name \'admin-user\' can\'t use - in name. It clashes with the traits construct'
@@ -24,13 +23,13 @@ describe 'Factory', ->
   describe '::create', ->
 
     it 'delivers options to the callback', ->
-      result = Factory.create 'user'
+      result = Factory.create 'testFactSpecUser'
         hello: 'world'
         other: 'value'
       result.args[0].should.deep.equal { hello: 'world', other: 'value' }
 
     it 'accepts multiple arguments', ->
-      result = Factory.create 'user', 1, 2, 3
+      result = Factory.create 'testFactSpecUser', 1, 2, 3
       result.args.should.deep.equal [1, 2, 3]
 
 
@@ -38,11 +37,11 @@ describe 'Factory', ->
 
     describe 'traits', ->
       beforeEach ->
-        Factory.define 'traits', ->
+        Factory.define 'testFactSpecTraits', ->
           traits: @traits
 
       it 'delivers traits to the callback', ->
-        result = Factory.create 'something-with-traits'
+        result = Factory.create 'something-with-testFactSpecTraits'
         result.traits.should.deep.equal ['something', 'with']
 
     describe '#is', ->
@@ -58,19 +57,19 @@ describe 'Factory', ->
     describe '#trait', ->
 
       beforeEach ->
-        Factory.define 'trait', ->
+        Factory.define 'testFactSpecTrait', ->
           @trait('red', 'green', 'refactor')
 
       it 'returns undefined if no values match', ->
-        expect(Factory.create('refgreen-trait')).to.be.undefined
+        expect(Factory.create('refgreen-testFactSpecTrait')).to.be.undefined
 
       it 'returns one of the provided trait values', ->
-        Factory.create('green-trait').should.equal 'green'
-        Factory.create('red-trait').should.equal 'red'
+        Factory.create('green-testFactSpecTrait').should.equal 'green'
+        Factory.create('red-testFactSpecTrait').should.equal 'red'
 
       it 'returns the first encountered if multiple values match', ->
-        Factory.create('green-red-trait').should.equal 'green'
-        Factory.create('refactor-green-trait').should.equal 'refactor'
+        Factory.create('green-red-testFactSpecTrait').should.equal 'green'
+        Factory.create('refactor-green-testFactSpecTrait').should.equal 'refactor'
 
     describe 'sequence', ->
 
