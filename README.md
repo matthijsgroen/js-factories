@@ -1,6 +1,8 @@
 js-factories
 ============
 
+[![Build Status](https://travis-ci.org/matthijsgroen/js-factories.png?branch=master)](https://travis-ci.org/matthijsgroen/js-factories)
+
 js-factories is a library to use dynamic fixtures using Factories in
 javascript/coffeescript. Ideal to combine using [Mocha](http://visionmedia.github.com/mocha/)/[chai](http://chaijs.com/) frameworks and test rich classes for MV\*\* Frameworks like [Backbone.js](http://backbonejs.org/)
 
