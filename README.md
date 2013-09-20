@@ -20,6 +20,7 @@ other objects as you see fit:
       new User attributes
 
     Factory.create 'user', name: 'Matthijs'
+    Factory.createList 10, 'user', name: 'Matthijs'
 
 ### Traits
 
