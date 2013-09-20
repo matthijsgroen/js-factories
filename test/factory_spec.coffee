@@ -15,7 +15,7 @@ describe 'Factory', ->
       result.args.should.deep.equal []
 
     it 'raises an error on existing factory', ->
-      expect(-> Factory.define('testFactSpecUser', ->)).to.throw 'Factory user is already defined'
+      expect(-> Factory.define('testFactSpecUser', ->)).to.throw 'Factory testFactSpecUser is already defined'
 
     it 'raises an error on naming conflict with traits', ->
       expect(-> Factory.define('admin-user', ->)).to.throw 'Factory name \'admin-user\' can\'t use - in name. It clashes with the traits construct'
@@ -23,7 +23,7 @@ describe 'Factory', ->
   describe '::create', ->
 
     it 'delivers options to the callback', ->
-      result = Factory.create 'testFactSpecUser'
+      result = Factory.create 'testFactSpecUser',
         hello: 'world'
         other: 'value'
       result.args[0].should.deep.equal { hello: 'world', other: 'value' }
