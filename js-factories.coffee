@@ -58,6 +58,9 @@
       obj = null
       r
 
+    createList: (amount, args...) ->
+      @create(args...) for i in [1..amount]
+
     resetFactories: ->
       @factories = []
 

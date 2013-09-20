@@ -32,6 +32,26 @@ describe 'Factory', ->
       result = Factory.create 'testFactSpecUser', 1, 2, 3
       result.args.should.deep.equal [1, 2, 3]
 
+  describe '::createList', ->
+    beforeEach ->
+      Factory.define 'testFactory', (args...) ->
+        index: @sequence('index')
+
+    afterEach ->
+      Factory.resetFactories()
+
+    it 'creates the amount of items as indicated', ->
+      result = Factory.createList 10, 'testFactory',
+        hello: 'world'
+        other: 'value'
+      result.length.should.equal 10
+
+    it 'creates all items in the list seperately', ->
+      result = Factory.createList 10, 'testFactory',
+        hello: 'world'
+        other: 'value'
+      result[0].index.should.equal 0
+      result[9].index.should.equal 9
 
   describe 'helpers', ->
 

@@ -76,6 +76,15 @@
         obj = null;
         return r;
       },
+      createList: function() {
+        var amount, args, i, _i, _results;
+        amount = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+        _results = [];
+        for (i = _i = 1; 1 <= amount ? _i <= amount : _i >= amount; i = 1 <= amount ? ++_i : --_i) {
+          _results.push(this.create.apply(this, args));
+        }
+        return _results;
+      },
       resetFactories: function() {
         return this.factories = [];
       }
