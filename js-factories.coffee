@@ -27,9 +27,9 @@
 
     define: (factoryName, builder) ->
       if factoryName.indexOf('-') > 0
-        throw "Factory name '#{factoryName}' can't use - in name. It clashes with the traits construct"
+        throw new Error "Factory name '#{factoryName}' can't use - in name. It clashes with the traits construct"
       if @factories[factoryName]?
-        throw "Factory #{factoryName} is already defined"
+        throw new Error "Factory #{factoryName} is already defined"
       @factories[factoryName] =
         sequences: {}
         factory: builder
@@ -38,7 +38,7 @@
       traits = nameWithTraits.split '-'
       factoryName = traits.pop()
       unless @factories[factoryName]?
-        throw "Factory #{factoryName} does not exist"
+        throw new Error "Factory #{factoryName} does not exist"
 
       f = @factories[factoryName]
       obj =
