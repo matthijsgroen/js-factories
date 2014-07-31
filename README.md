@@ -91,6 +91,6 @@ Will randomly return a, b or c every time
 
 ## License
 
-Copyright (c) 2012 Matthijs Groen
+Copyright (c) 2012-2014 Matthijs Groen
 
 MIT License (see the LICENSE file)

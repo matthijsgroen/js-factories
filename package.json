@@ -3,7 +3,7 @@
   "name": "js-factories",
   "description": "Object factory to create dynamic test fixtures",
   "keywords": [ "test", "fixtures", "factory", "testing", "traits", "sequences" ],
-  "version": "1.0.1",
+  "version": "1.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/matthijsgroen/js-factories"
