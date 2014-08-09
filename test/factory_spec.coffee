@@ -12,7 +12,7 @@ describe 'Factory', ->
 
     it 'registers a factory', ->
       result = Factory.create 'testFactSpecUser'
-      result.args.should.deep.equal []
+      expect(result.args).to.deep.equal []
 
     it 'raises an error on existing factory', ->
       expect(-> Factory.define('testFactSpecUser', ->)).to.throw 'Factory testFactSpecUser is already defined'
@@ -26,11 +26,11 @@ describe 'Factory', ->
       result = Factory.create 'testFactSpecUser',
         hello: 'world'
         other: 'value'
-      result.args[0].should.deep.equal { hello: 'world', other: 'value' }
+      expect(result.args[0]).to.deep.equal { hello: 'world', other: 'value' }
 
     it 'accepts multiple arguments', ->
       result = Factory.create 'testFactSpecUser', 1, 2, 3
-      result.args.should.deep.equal [1, 2, 3]
+      expect(result.args).to.deep.equal [1, 2, 3]
 
   describe '::createList', ->
     beforeEach ->
@@ -44,14 +44,14 @@ describe 'Factory', ->
       result = Factory.createList 10, 'testFactory',
         hello: 'world'
         other: 'value'
-      result.length.should.equal 10
+      expect(result.length).to.equal 10
 
     it 'creates all items in the list seperately', ->
       result = Factory.createList 10, 'testFactory',
         hello: 'world'
         other: 'value'
-      result[0].index.should.equal 0
-      result[9].index.should.equal 9
+      expect(result[0].index).to.equal 0
+      expect(result[9].index).to.equal 9
 
   describe 'helpers', ->
 
@@ -62,7 +62,7 @@ describe 'Factory', ->
 
       it 'delivers traits to the callback', ->
         result = Factory.create 'something-with-testFactSpecTraits'
-        result.traits.should.deep.equal ['something', 'with']
+        expect(result.traits).to.deep.equal ['something', 'with']
 
     describe '#is', ->
 
@@ -70,9 +70,9 @@ describe 'Factory', ->
         Factory.define 'hasTrait', ->
           @is('hello')
 
-        Factory.create('hello-hasTrait').should.be.ok
-        Factory.create('bye-hasTrait').should.not.be.ok
-        Factory.create('bye-other-hello-somewhere-hasTrait').should.be.ok
+        expect(Factory.create('hello-hasTrait')).to.be.ok
+        expect(Factory.create('bye-hasTrait')).to.not.be.ok
+        expect(Factory.create('bye-other-hello-somewhere-hasTrait')).to.be.ok
 
     describe '#trait', ->
 
@@ -84,12 +84,12 @@ describe 'Factory', ->
         expect(Factory.create('refgreen-testFactSpecTrait')).to.be.undefined
 
       it 'returns one of the provided trait values', ->
-        Factory.create('green-testFactSpecTrait').should.equal 'green'
-        Factory.create('red-testFactSpecTrait').should.equal 'red'
+        expect(Factory.create('green-testFactSpecTrait')).to.equal 'green'
+        expect(Factory.create('red-testFactSpecTrait')).to.equal 'red'
 
       it 'returns the first encountered if multiple values match', ->
-        Factory.create('green-red-testFactSpecTrait').should.equal 'green'
-        Factory.create('refactor-green-testFactSpecTrait').should.equal 'refactor'
+        expect(Factory.create('green-red-testFactSpecTrait')).to.equal 'green'
+        expect(Factory.create('refactor-green-testFactSpecTrait')).to.equal 'refactor'
 
     describe 'sequence', ->
 
@@ -104,13 +104,13 @@ describe 'Factory', ->
           @sequence((c) -> ['a', 'b', 'c'][c])
 
       it 'provides sequencers scoped to factory and property', ->
-        Factory.create('counter').should.equal 0
-        Factory.create('otherCounter').should.equal 0
-        Factory.create('counter').should.equal 1
+        expect(Factory.create('counter')).to.equal 0
+        expect(Factory.create('otherCounter')).to.equal 0
+        expect(Factory.create('counter')).to.equal 1
 
       it 'can yield results', ->
-        Factory.create('abc').should.equal 'a'
-        Factory.create('abc').should.equal 'b'
+        expect(Factory.create('abc')).to.equal 'a'
+        expect(Factory.create('abc')).to.equal 'b'
 
     describe 'sample', ->
 
@@ -123,9 +123,9 @@ describe 'Factory', ->
 
       it 'returns one of the provided values', ->
         @mathStub = sinon.stub Math, 'random', -> 0.01
-        Factory.create('sampling').should.eql 'henk'
+        expect(Factory.create('sampling')).to.eql 'henk'
 
       it 'uses random to decide value', ->
         @mathStub = sinon.stub Math, 'random', -> 0.99
-        Factory.create('sampling').should.eql 'kees'
+        expect(Factory.create('sampling')).to.eql 'kees'
 
