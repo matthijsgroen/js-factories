@@ -16,11 +16,13 @@ Include `js-factories.js` in your test suite.
 Factory support is added to quickly be able to build models or
 other objects as you see fit:
 
-    Factory.define 'user', (attributes = {}) ->
-      new User attributes
+```coffee
+Factory.define 'user', (attributes = {}) ->
+  new User attributes
 
-    Factory.create 'user', name: 'Matthijs'
-    Factory.createList 10, 'user', name: 'Matthijs'
+Factory.create 'user', name: 'Matthijs'
+Factory.createList 10, 'user', name: 'Matthijs'
+```
 
 ### Traits
 
@@ -37,55 +39,67 @@ this list is accessible in the factory callback using `this.traits`
 
 There are 2 helper methods to help check if traits are set:
 
-    this.trait('returns', 'one', 'of', 'these', 'values')
+```coffee
+this.trait('returns', 'one', 'of', 'these', 'values')
+```
 
 and
 
-    this.is('admin') # returns a boolean value
+```coffee
+this.is('admin') # returns a boolean value
+```
 
 Extended example:
 
-    Factory.define 'user', (attributes = {}) ->
-      attributes.gender = @trait('male', 'female') || 'male'
+```coffee
+Factory.define 'user', (attributes = {}) ->
+  attributes.gender = @trait('male', 'female') || 'male'
 
-      returningClass = User
-      if @is('admin')
-        returningClass = AdminUser
+  returningClass = User
+  if @is('admin')
+    returningClass = AdminUser
 
-      new returningClass attributes
+  new returningClass attributes
 
-    Factory.create 'user', name: 'Matthijs' # => new User name: 'Matthijs'
-    Factory.create 'male-user', name: 'Matthijs' # => new User name: 'Matthijs', gender: 'male'
-    Factory.create 'male-admin-user', name: 'Matthijs' # => new AdminUser name: 'Matthijs', gender: 'male'
-    Factory.create 'female-user', name: 'Beppie' # => new User name: 'Beppie', gender: 'female'
+Factory.create 'user', name: 'Matthijs' # => new User name: 'Matthijs'
+Factory.create 'male-user', name: 'Matthijs' # => new User name: 'Matthijs', gender: 'male'
+Factory.create 'male-admin-user', name: 'Matthijs' # => new AdminUser name: 'Matthijs', gender: 'male'
+Factory.create 'female-user', name: 'Beppie' # => new User name: 'Beppie', gender: 'female'
+```
 
 ### Sequences
 
 Sequences are also supported:
 
-    Factory.define 'counter', ->
-      {
-        amount: @sequence('amount')
-        other: @sequence('other')
-      }
+```coffee
+Factory.define 'counter', ->
+  {
+    amount: @sequence('amount')
+    other: @sequence('other')
+  }
+```
 
 This does not conflict with similar names in other factory definitions.
 
 You can also yield results:
 
-    Factory.define 'abc', ->
-      @sequence (i) -> ['a','b','c'][i]
+```coffee
+Factory.define 'abc', ->
+  @sequence (i) -> ['a','b','c'][i]
 
-    # results in:
-    Factory.create('abc') => 'a'
-    Factory.create('abc') => 'b'
+# results in:
+Factory.create('abc') => 'a'
+Factory.create('abc') => 'b'
+```
 
 ### Sampling
 
 You can sample a value from a list
 
-    Factory.define 'sampler', ->
-      @sample 'a', 'b', 'c'
+```coffee
+Factory.define 'sampler', ->
+  @sample 'a', 'b', 'c'
+```
 
 Will randomly return a, b or c every time
 
