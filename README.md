@@ -16,12 +16,16 @@ Include `js-factories.js` in your test suite.
 Factory support is added to quickly be able to build models or
 other objects as you see fit:
 
-```coffee
-Factory.define 'user', (attributes = {}) ->
-  new User attributes
-
-Factory.create 'user', name: 'Matthijs'
-Factory.createList 10, 'user', name: 'Matthijs'
+```javascript
+  Factory.define('user', function(attributes) {
+    if (attributes == null) {
+      attributes = {};
+    }
+    return new User(attributes);
+  });
+  
+  Factory.create('user', { name: 'Matthijs' })
+  Factory.createList(10, 'user', { name: 'Matthijs' })
 ```
 
 ### Traits
