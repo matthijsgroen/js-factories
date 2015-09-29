@@ -6,5 +6,5 @@ branches:
     - master
 sudo: false
 before_install:
-  - npm install -g npm
+  - npm install -g npm@'>=1.4.3'
 
